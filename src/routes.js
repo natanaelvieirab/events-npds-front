@@ -28,7 +28,7 @@ const Routes = () => (
       <SchedulesForm />
     </Route>
 
-    <Redirect to="/login" />
+
   </Router>
 )
 
