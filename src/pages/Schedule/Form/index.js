@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useHistory, useParams } from "react-router";
 
 import api from "../../../service/api";
+import "../../Events/Form/style.css";
 
 const SchedulesForm = () => {
 
@@ -49,45 +50,52 @@ const SchedulesForm = () => {
         }
     }
 
+    const handleBack = () => {
+        history.push(`/events/${event_id}/schedule`);
+    }
+
     return (
-        <form onSubmit={handleSubmit}
-            style={{
-                backgroundColor: "#333",
-                display: "flex",
-                flex: 1,
-                height: "100vh",
-                padding: "20px"
-            }}>
+        <div class="container-formulario" style={{ height: "140vh" }}>
+            <div class="card-formulario">
 
-            <label>Name</label>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                <span>
+                    <h2>Criar uma nova Programação</h2>
+                    <button onClick={handleBack}>Voltar</button>
+                </span>
 
-            <label>Description</label>
-            <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
+                <form class="formulario" onSubmit={handleSubmit}  >
 
-            <label>Apresentador</label>
-            <input type="text" value={presenter} onChange={(e) => setPresenter(e.target.value)} />
+                    <label>Name</label>
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
 
-            <label>Localization</label>
-            <input type="text" value={localization} onChange={(e) => setLocalization(e.target.value)} />
+                    <label>Description</label>
+                    <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
 
-            <label>Hora de inicio</label>
-            <input type="text" value={beginTime} onChange={(e) => setBeginTime(e.target.value)} />
+                    <label>Apresentador</label>
+                    <input type="text" value={presenter} onChange={(e) => setPresenter(e.target.value)} />
 
-            <label>Hora de encerramento</label>
-            <input type="text" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
+                    <label>Localization</label>
+                    <input type="text" value={localization} onChange={(e) => setLocalization(e.target.value)} />
 
-            <label>Data de inicio</label>
-            <input type="date" value={beginDate} onChange={(e) => setBeginDate(e.target.value)} />
+                    <label>Hora de inicio</label>
+                    <input type="text" value={beginTime} onChange={(e) => setBeginTime(e.target.value)} />
 
-            <label>Data de encerramento</label>
-            <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                    <label>Hora de encerramento</label>
+                    <input type="text" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
 
-            <label>Duração</label>
-            <input type="text" value={workload} onChange={(e) => setWorkload(e.target.value)} />
+                    <label>Data de inicio</label>
+                    <input type="date" value={beginDate} onChange={(e) => setBeginDate(e.target.value)} />
 
-            <button type="submit">Cadastrar</button>
-        </form>
+                    <label>Data de encerramento</label>
+                    <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+
+                    <label>Duração</label>
+                    <input type="text" value={workload} onChange={(e) => setWorkload(e.target.value)} />
+
+                    <button type="submit">Cadastrar</button>
+                </form>
+            </div>
+        </div>
     );
 }
 
