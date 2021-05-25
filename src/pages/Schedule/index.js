@@ -43,7 +43,19 @@ const Schedules = () => {
             <a href={`/events/${event_id}/schedule/new`}>Criar nova programação</a>
 
             <ul>
-                {schedules.map((item) => <li key={item.id}>{item.name}</li>)}
+                {schedules.map((item) => <li key={item.id}>
+
+                    <b>{item.name}</b>
+                    <br />
+                    - Data de Inicio: {new Date(item.beginDate).toLocaleDateString()}
+                     as {item.beginTime}
+
+                    <br />
+
+                    - Data de Encerramento: {new Date(item.beginDate).toLocaleDateString()}
+                     as {item.endTime}
+
+                </li>)}
             </ul>
         </div>
     );
