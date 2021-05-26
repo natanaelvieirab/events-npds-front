@@ -37,8 +37,14 @@ const EventForm = () => {
 
     } catch (e) {
 
-      console.log(e)
-      alert(e.response.data.message)
+      const message = e.response.data.message;
+
+      if (message === "Data final Invalida") {
+        alert("As datas estão em ordem incorreta!");
+      } else {
+        console.log(e)
+        alert(message);
+      }
     }
   }
 

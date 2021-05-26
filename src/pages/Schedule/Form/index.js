@@ -45,8 +45,14 @@ const SchedulesForm = () => {
             history.push(`/events/${event_id}/schedule`);
 
         } catch (e) {
-            console.log(e);
-            alert("deu erro no form");
+            const message = e.response.data.message;
+
+            if (message === "Data final Invalida") {
+                alert("As datas estão em ordem incorreta!");
+            } else {
+                console.log(e)
+                alert(message);
+            }
         }
     }
 
