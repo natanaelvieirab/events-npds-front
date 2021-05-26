@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router';
-import api from '../../service/api';
+import { useHistory, useParams } from 'react-router';
 
+import api from '../../service/api';
+import "../Events/style.css"
 
 const Schedules = () => {
 
@@ -11,6 +12,8 @@ const Schedules = () => {
     const PAGE_SIZE = 40;
 
     const { id: event_id } = useParams();
+
+    const history = useHistory();
 
     const getSchedules = async () => {
         try {
@@ -36,27 +39,38 @@ const Schedules = () => {
         getSchedules();
     }, [])
 
+    const handleBack = () => {
+        history.push("/home");
+    }
+
     return (
-        <div>
-            <h1>Programações</h1>
+        <div class="container">
+            <div class="card">
+                <span>
+                    <h1>Programações</h1>
 
-            <a href={`/events/${event_id}/schedule/new`}>Criar nova programação</a>
+                    <button class="back" onClick={handleBack}>Voltar</button>
+                </span>
+                <a href={`/events/${event_id}/schedule/new`}>Criar nova programação</a>
+                <p>Programação cadastrada:</p>
+                <ul>
+                    {schedules.map((item) => <li key={item.id}>
+                        <div>
+                            <b>{item.name}</b>
+                            <br />
+                            - Data de Inicio: {new Date(item.beginDate).toLocaleDateString()}
+                            as {item.beginTime}
 
-            <ul>
-                {schedules.map((item) => <li key={item.id}>
+                            <br />
 
-                    <b>{item.name}</b>
-                    <br />
-                    - Data de Inicio: {new Date(item.beginDate).toLocaleDateString()}
-                     as {item.beginTime}
+                            - Data de Encerramento: {new Date(item.beginDate).toLocaleDateString()}
+                            as {item.endTime}
+                        </div>
+                    </li>)}
+                </ul>
 
-                    <br />
 
-                    - Data de Encerramento: {new Date(item.beginDate).toLocaleDateString()}
-                     as {item.endTime}
-
-                </li>)}
-            </ul>
+            </div>
         </div>
     );
 }
