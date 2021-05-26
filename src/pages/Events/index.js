@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router';
 
 import api from '../../service/api'
-
+import "./style.css";
 
 const Events = () => {
   const [events, setEvents] = useState([]);
@@ -24,8 +24,8 @@ const Events = () => {
 
       setEvents(response.data);
     } catch (e) {
-      console.log(e)
-      alert(e.response.data.message)
+      console.log(e);
+      alert(e.response.data.message);
     }
   }
 
@@ -33,20 +33,35 @@ const Events = () => {
     getEvents();
   }, [])
 
+  const handleNewEvent = () => {
+    history.push("/events/new");
+  }
 
   return (
-    <div>
-      <h1>Events</h1>
-      <a href="/events/new">Criar Evento</a>
+    <div class="container">
+      <div class="card">
+        <h1 class="title">Events</h1>
 
-      <ul>
-        {events.map((item) => <li key={item.id}>
-          <a href={`/events/${item.id}/schedule`} >{item.name}</a>
-          - {new Date(item.beginDate).toLocaleDateString()}
-          - {new Date(item.endDate).toLocaleDateString()}
-        </li>)}
-      </ul>
+        <p>Eventos cadastrados:</p>
 
+        <ul>
+          {events.map((item) => <li key={item.id}>
+            <div>
+              <b>{item.name}</b>
+              <br />
+              Data de Inicio: {new Date(item.beginDate).toLocaleDateString()}
+              <br />
+              Data de Encerramento: {new Date(item.endDate).toLocaleDateString()}
+              <br /> <br />
+              <a href={`/events/${item.id}/schedule`}>Programação</a>
+
+            </div>
+          </li>)}
+        </ul>
+
+        <button class="new" onClick={handleNewEvent}>Criar Evento</button>
+
+      </div>
     </div>
   )
 }
